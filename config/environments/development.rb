@@ -73,6 +73,9 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.hosts.clear
 
+  #アクセス権限の設定
+  config.hosts.clear
+  # 画像を小さくする設定に当たってエラーの回避
+  config.active_job.queue_adapter = :inline
 end
