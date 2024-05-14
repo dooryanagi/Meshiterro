@@ -11,6 +11,7 @@ class PostImagesController < ApplicationController
   end
 
   def show
+    @post_image = PostImage.find(params[:id])
   end
   
   # 投稿データの保存
