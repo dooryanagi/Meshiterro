@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   # このメソッドはdeviseが用意しているメソッド、デフォルトはルートパス、そのため変更が必要
   # resourceという引数にはログインを実行したUserモデルのデータであるインスタンスが格納されている
   def after_sign_in_path_for(resource)
-    about_path
+    # ログイン後は一覧を表示できるよう変更
+    post_images_path
   end
 
   # サインアウト後の遷移先にAboutを指定する
