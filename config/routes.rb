@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
 
   # usersコントローラーの作成とともにデフォルトで作成されたルーティングをresourcesで書き換える
-  resources :users, only: [:show, :edit]
+  resources :users, only: [:show, :edit, :update]
 
   # post_imagesコントローラーとアクションの作成によりできたルーティングをresourcesで書き換える
   # resourcesにonlyのオプションを追加することで、必要なルートみ作成できる
