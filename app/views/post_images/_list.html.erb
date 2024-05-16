@@ -1,0 +1,31 @@
+<!--移動してきた記述のインスタンス変数をローカル変数に書き換える-->
+
+<!--コントローラーから渡された@post_images変数内からeachで一つずつ取り出してブロック変数のpost_imageへ格納する-->
+<% post_images.each do |post_image| %>
+
+  <div>
+    <!--image_tagメソッド？-->
+    <!--post_image.get_imageはPostImageモデル内に記述したメソッドを呼び出している-->
+
+    <!--詳細へのリンクを作成-->
+    <%= link_to post_image_path(post_image.id) do %>
+      <%= image_tag post_image.get_image %>
+    <% end %>
+
+    <!--ダミー画像ではなくpost_imageからプロフィール画像を取り出す-->
+    <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
+
+    <!--表示させるカラム名を指定-->
+    <p>ショップ名：<%= post_image.shop_name %></p>
+
+    <p>説明：<%= post_image.caption %></p>
+
+    <!--post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示する-->
+    <!--関連付けを行っているため、userモデルに定義されている情報であれば.user.カラム名で取得できる-->
+    <p>ユーザーネーム：<%= post_image.user.name %></p>
+    
+    <!--投稿に対するコメント数と詳細画面へのリンク（詳細にコメントを表示するようにしているため）-->
+    <p><%= link_to "#{post_image.post_comments.count}件のコメント", post_image_path(post_image.id) %></p>
+  </div>
+
+<% end %>
