@@ -59,3 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ユーザー認証機能の追加のためにdeviseを追加する
 gem 'devise'
+
+
+# ページネーション機能を追加するためにKaminariをダウンロードする
+gem 'kaminari', '~> 1.2.1'

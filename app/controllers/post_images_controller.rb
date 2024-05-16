@@ -7,7 +7,8 @@ class PostImagesController < ApplicationController
   end
 
   def index
-    @post_images = PostImage.all
+    # allからページネーションするために新しい順、かつ決められた数のデータの取得に変更する
+    @post_images = PostImage.page(params[:page])
   end
 
   def show
