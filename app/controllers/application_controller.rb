@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
 
+  # ログイン認証が成功していないとトップページ以外には行けないように制限する
+  before_action :authenticate_user!, except: [:top]
+
   # deviseのコントローラは直接修正できないため、全てのコントローラに対する処理を行える権限を持つこの場所に記述する
   # before_actionにより、devise機能の前にメソッドが実行される
   before_action :configure_permitted_parameters, if: :devise_controller?

@@ -11,6 +11,10 @@ class PostImage < ApplicationRecord
   # 画像とコメントは１画像に対してNいいね、複数形
   has_many :favorites, dependent: :destroy
 
+  #お店の名前と画像が存在しているかを確認するバリデーションを設定する 
+  validates :shop_name, presence: true
+  validates :image, presence: true
+
   # 画像を表示させる
   # ビューに記述すると何度も同じ記述をする必要があるためモデルに記述する（これにより使いまわすことも可能）
   # アクションとは異なる、特定の処理を名前で呼び出すことができるようになる

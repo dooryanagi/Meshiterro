@@ -1,5 +1,18 @@
 <h1>画像投稿フォーム</h1>
 
+<!--バリデーションのチェックの結果をエラー文で表記する-->
+<!--erroesメソッドはモデルにバリデーションをかけたときに発生したエラーの内容を確認できる-->
+<!--erroes.any?でエラーの発生の有無を判定することができる-->
+<% if @post_image.errors.any? %>
+  <%= @post_image.errors.count %>件のエラーが発生しました
+
+  <ul>
+    <% @post_image.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @post_image do |f|%>
 
   <h4>画像</h4>
