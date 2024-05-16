@@ -8,8 +8,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # 1：Nの関連付けを行う
-  # ユーザーと画像は、一人のユーザーに対してたくさんの画像となるため、ユーザーが1、画像がNとなる
-  has_many :post_image, dependent: :destroy
+  # ユーザーと画像は、一人のユーザーに対してたくさんの画像となるため、ユーザーが1、画像がNとなる、複数形で記述
+  has_many :post_images, dependent: :destroy
+  # ユーザーとコメントは1ユーザーに対してNコメント、複数形で記述
+  has_many :post_comments, dependent: :destroy
 
   # userモデルに対してもActiveAtrageで画像を保存できるように設定する
   has_one_attached :profile_image

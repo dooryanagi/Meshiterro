@@ -13,10 +13,11 @@ Rails.application.routes.draw do
 
   # post_imagesコントローラーとアクションの作成によりできたルーティングをresourcesで書き換える
   # resourcesにonlyのオプションを追加することで、必要なルートみ作成できる
-  resources :post_images, only: [:new, :index, :show, :create, :destroy]
-
-
-
+  # 画像に紐づくコメントのルーティングをする、画像とコメントは親子関係になる
+  resources :post_images, only: [:new, :index, :show, :create, :destroy] do
+    # do~end内に記述すると、親子関係のリンク・ルーティングを作成することができる
+    resources :post_comments, only: [:create, :destroy]
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

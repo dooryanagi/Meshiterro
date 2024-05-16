@@ -6,6 +6,8 @@ class PostImage < ApplicationRecord
   # １：NのNに相当する記述を追加する
   # 画像側から見るとuserは常に1のため、単数形
   belongs_to :user
+  # 画像とコメントは、１画像に対してNコメント、複数形
+  has_many :post_comments, dependent: :destroy
 
   # 画像を表示させる
   # ビューに記述すると何度も同じ記述をする必要があるためモデルに記述する（これにより使いまわすことも可能）

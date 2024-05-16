@@ -12,6 +12,8 @@ class PostImagesController < ApplicationController
 
   def show
     @post_image = PostImage.find(params[:id])
+    # コメントを投稿するためのインスタンス変数を定義
+    @post_comment = PostComment.new
   end
 
   # 投稿データの保存
