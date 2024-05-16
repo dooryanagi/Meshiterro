@@ -10,7 +10,8 @@
       <%= image_tag post_image.get_image %>
     <% end %>
 
-    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+    <!--ダミー画像ではなくpost_imageからプロフィール画像を取り出す-->
+    <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
 
     <!--表示させるカラム名を指定-->
     <p>ショップ名：<%= post_image.shop_name %></p>
