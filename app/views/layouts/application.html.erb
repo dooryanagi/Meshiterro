@@ -6,33 +6,59 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--レスポンシブ対応にするためにviewportを設定する-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--FontAwesomeを導入-->
+    <script src="https://kit.fontawesome.com/7ae0cf8aaf.js" crossorigin="anonymous"></script>
+    <!--Bootstrap導入のために変更(link→pack)-->
+    <!--linkの場合はapp/assets配下を参照、packの場合はapp/javascriptを参照-->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+<!--Bootstrapを使った記述に変更していく、classを指定することで整っていくそうな-->
+  <!--vh-100はviewport heightの100％-->
+  <body class="d-flex flex-column vh-100">
     <!--登録、ログイン、ログアウトなどの共通のリンクをヘッダー部分に記述する-->
-    <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "投稿フォーム", new_post_image_path %>
-        </li>
-        <li>
-          <%= link_to "マイページ", user_path(current_user.id) %>
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_user_session_path %>
-        </li>
-      <% end %>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%= image_tag('logo.png') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" area-controls="navbarNavDropdown" area-expanded="false" area-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+            </li>
+
+            <li class="nav-item">
+            <%= link_to "投稿フォーム", new_post_image_path, class: 'nav-link text-dark' %>
+            </li>
+
+            <li class="nav-item">
+            <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %>
+            </li>
+
+            <% else %>
+            <li  class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+            </li>
+
+            <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
+<!--メインから再開-->
     <%= yield %>
   </body>
 </html>
