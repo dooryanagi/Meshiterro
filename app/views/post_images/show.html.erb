@@ -17,6 +17,24 @@
     <%= link_to "削除", post_image_path(@post_image), method: :delete %>
   <% end %>
 
+  <!--いいね機能の表示→すでにいいねした人は削除が、まだの人はいいねできるように分岐-->
+  <% if @post_image.favorited_by?(current_user) %>
+    <p>
+      <!--すでにいいねした場合-->
+      <%= link_to post_image_favorite_path(@post_image), method: :delete do %>
+        ♥<%=@post_image.favorites.count %>いいね
+      <% end %>
+    </p>
+
+  <% else %>
+    <p>
+      <!--まだいいねしていない場合-->
+      <%= link_to post_image_favorite_path(@post_image), method: :post do %>
+        ♡<%= @post_image.favorites.count %>いいね
+      <% end %>
+    </p>
+  <% end %>
+
 </div>
 
 <div>
@@ -25,7 +43,7 @@
     <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
     <%= post_comment.user.name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-    
+
     <!--本人の場合に削除ボタンを表示させる-->
     <% if post_comment.user == current_user %>
       <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete %>

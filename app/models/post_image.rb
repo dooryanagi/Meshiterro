@@ -8,6 +8,8 @@ class PostImage < ApplicationRecord
   belongs_to :user
   # 画像とコメントは、１画像に対してNコメント、複数形
   has_many :post_comments, dependent: :destroy
+  # 画像とコメントは１画像に対してNいいね、複数形
+  has_many :favorites, dependent: :destroy
 
   # 画像を表示させる
   # ビューに記述すると何度も同じ記述をする必要があるためモデルに記述する（これにより使いまわすことも可能）
@@ -20,6 +22,11 @@ class PostImage < ApplicationRecord
       image.attach(io: File.open(file_path),filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image
+  end
+
+  # いいねが一人一回しかできないように制限する
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
 
 end

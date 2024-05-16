@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :post_images, dependent: :destroy
   # ユーザーとコメントは1ユーザーに対してNコメント、複数形で記述
   has_many :post_comments, dependent: :destroy
+  # ユーザーといいねは１ユーザーに対してN言い値、複数形
+  has_many :favorites, dependent: :destroy
 
   # userモデルに対してもActiveAtrageで画像を保存できるように設定する
   has_one_attached :profile_image
